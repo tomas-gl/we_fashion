@@ -1,0 +1,22 @@
+Base:
+1 - Mise en place du projet
+2 - Schéma des données
+3 - Migrations
+4 - Seeders
+5 - Models
+
+Partie client:
+1 - Barre de navigation/Footer
+2 - Affichage produits page d'accueil
+3 - Pagination
+4 - Filtre Solde/Homme/Femme dans la barre de navigation
+5 - Page produit
+
+Partie administrateur:
+1 - Système d'authentification sur la route /admin
+2 - Navigation Produits/Catégories/Partie Client
+2 - Affichage produits page d'accueil (onglet produits par défaut)
+3 - Pagination
+4 - Formulaire création
+5 - Formulaire édition
+6 - Bouton suppression
