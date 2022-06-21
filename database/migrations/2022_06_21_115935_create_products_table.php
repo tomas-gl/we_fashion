@@ -21,7 +21,7 @@ return new class extends Migration
             $table->text('description')->nullable();
             $table->decimal('price', $precision = 8, $scale = 2)->nullable();
             $table->enum('size', ['XS', 'S', 'M', 'L', 'XL'])->nullable();
-            $table->string('picture', 100)->nullable();
+            $table->string('picture', 255)->nullable();
             $table->tinyInteger('status')->nullable();
             $table->tinyInteger('state')->nullable();
             $table->string('reference', 16)->nullable();
