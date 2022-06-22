@@ -19,8 +19,11 @@ Route::get('/', function () {
     return redirect('/products');
 });
 
-Route::get('/products', [ProductController::class, 'index']);
-Route::get('/products/solde', [ProductController::class, 'getStatus']);
-Route::get('/products/{category_slug}', [ProductController::class, 'getCategory']);
+Route::controller(ProductController::class)->prefix('products')->group(function(){
+    Route::get('', 'index');
+    Route::get('/solde','getStatus');
+    Route::get('/{category_slug}','getCategory');
+});
+
 
 // Route::get('/products', [ProductController::class, 'index']);
