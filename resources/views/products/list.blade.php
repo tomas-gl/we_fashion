@@ -17,5 +17,7 @@
 @empty
     <p>Aucun produits</p>
 @endforelse
+        {{$products->links("pagination::bootstrap-4")}}
+
     </div>
 @endsection
