@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\CategoryController;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,3 +20,7 @@ Route::get('/', function () {
 });
 
 Route::get('/products', [ProductController::class, 'index']);
+Route::get('/products/solde', [ProductController::class, 'getStatus']);
+Route::get('/products/{category_slug}', [ProductController::class, 'getCategory']);
+
+// Route::get('/products', [ProductController::class, 'index']);

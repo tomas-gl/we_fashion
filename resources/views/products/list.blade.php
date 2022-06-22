@@ -2,6 +2,7 @@
 
 @section('content')
     <div class="row">
+        <h1 class="my-3">{{$page_title}}</h1>
         @forelse ($products as $product)
         <div class="col-4 my-3">
             <a href="">

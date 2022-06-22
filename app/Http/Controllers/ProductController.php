@@ -15,10 +15,35 @@ class ProductController extends Controller
     public function index()
     {
         
-        $products = Product::paginate(6);
+        $data['products'] = Product::paginate(6);
+        $data['page_title'] = "Tous les articles";
         // dd($products);
 
-        return view('products.list', ['products' => $products]);
+        return view('products.list', $data);
+    }
+
+    public function getStatus()
+    {      
+        $data['products'] = Product::where('status', "1")->paginate(6);
+        $data['page_title'] = "Articles en solde";
+
+        return view('products.list', $data);
+    }
+
+    public function getCategory($category_slug)
+    {
+
+        // die;
+        $data['products'] = Product::where('category_id', $category_slug)->paginate(6);
+        if($category_slug == 1){
+            $data['page_title'] = "Catégorie homme";
+        }
+        else{
+            $data['page_title'] = "Catégorie femme"; 
+        }
+        // dd($products);
+
+        return view('products.list', $data);
     }
 
     /**
