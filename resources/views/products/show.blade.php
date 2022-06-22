@@ -3,7 +3,7 @@
 @section('content')
 <div class="row">
     <div class="col-7">
-      <img class="w-100" @if(!isset($product->picture)) src="{{ asset('storage/image_default.png') }}" @else src="{{$product->picture}}" @endif alt="image_produit">
+      <img class="w-100" @if(!isset($product->picture)) src="{{ asset('storage/image_default.png') }}" @else src="{{asset('storage/images/'.$product->picture)}}" @endif alt="image_produit">
     </div>
     <div class="col-5">
       <p class="fs-5">{{$product->name}}</p>
