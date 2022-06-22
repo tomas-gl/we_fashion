@@ -22,8 +22,8 @@ class ProductFactory extends Factory
             'description' => $this->faker->paragraph(),
             'price' => $this->faker->randomFloat($nbMaxDecimals = 2, $min = 0, $max = 100),
             'size' => $this->faker->randomElement($array = array ('XS','S','M','L','XL')),
-            'status' => $this->faker->numberBetween(0, 1),
-            'state' => $this->faker->numberBetween(0, 1),
+            'published' => $this->faker->numberBetween(0, 1),
+            'discount' => $this->faker->numberBetween(0, 1),
             'reference' => $this->faker->bothify('?###??##?###??##'),
         ];
     }

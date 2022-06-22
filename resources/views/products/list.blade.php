@@ -5,9 +5,9 @@
         <h1 class="my-3">{{$page_title}}</h1>
         @forelse ($products as $product)
         <div class="col-4 my-3">
-            <a href="">
+            <a href="{{route('product', $product->id)}}">
                 <div class="card h-100">
-                    <img src="{{$product->picture}}" class="card-img-top" alt="...">
+                    <img  @if(!isset($product->picture)) src="{{ asset('storage/image_default.png') }}" @else src="{{$product->picture}}" @endif alt="image_produit">
                     <div class="card-body">
                         <h5 class="card-title">{{$product->name}}</h5>
                         <p class="card-text">{{$product->description}}</p>

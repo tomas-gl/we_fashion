@@ -22,10 +22,19 @@ class ProductController extends Controller
         return view('products.list', $data);
     }
 
-    public function getStatus()
+    public function getProduct($id)
+    {
+        $data['product'] = Product::find($id);
+        // dd($data['product']);
+
+        return view('products.show', $data);
+    }
+
+    public function getSolde($status)
     {      
-        $data['products'] = Product::where('status', "1")->paginate(6);
-        $data['page_title'] = "Articles en solde";
+        // dd("test");
+        $data['products'] = Product::where('discount', $status)->paginate(6);
+        $data['page_title'] = "Articles en soldes";
 
         return view('products.list', $data);
     }
@@ -33,7 +42,6 @@ class ProductController extends Controller
     public function getCategory($category_slug)
     {
 
-        // die;
         $data['products'] = Product::where('category_id', $category_slug)->paginate(6);
         if($category_slug == 1){
             $data['page_title'] = "Catégorie homme";

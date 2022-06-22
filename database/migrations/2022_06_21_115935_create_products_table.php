@@ -22,8 +22,8 @@ return new class extends Migration
             $table->decimal('price', $precision = 8, $scale = 2)->nullable();
             $table->enum('size', ['XS', 'S', 'M', 'L', 'XL'])->nullable();
             $table->string('picture', 255)->nullable();
-            $table->boolean('status')->nullable();
-            $table->boolean('state')->nullable();
+            $table->boolean('published')->nullable();
+            $table->boolean('discount')->nullable();
             $table->string('reference', 16)->nullable();
             $table->timestamps();
         });
