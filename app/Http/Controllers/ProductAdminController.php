@@ -18,7 +18,7 @@ class ProductAdminController extends Controller
         $data['products'] = Product::paginate(15);
         // dd($products);
 
-        return view('back.products.list', $data);
+        return view('back.products.index', $data);
     }
 
     /**
