@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Product;
+use App\Models\Category;
 
 class ProductAdminController extends Controller
 {
@@ -15,8 +16,10 @@ class ProductAdminController extends Controller
     public function index()
     {
         $data['products'] = Product::paginate(15);
-        // dd($products);
-
+        foreach($data['products'] as $key=>$product){
+            $data['products'][$key]['categorie'] = Category::where("id", $product->category_id)->first()->name; 
+        }
+            // dd($data['products']);
         return view('back.products.index', $data);
     }
 
@@ -60,7 +63,9 @@ class ProductAdminController extends Controller
      */
     public function edit($id)
     {
-        //
+        $data['product'] = Product::find($id);
+
+        return view('back.products.edit', $data);
     }
 
     /**
