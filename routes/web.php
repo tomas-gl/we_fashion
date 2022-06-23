@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\ProductAdminController;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,3 +26,15 @@ Route::controller(ProductController::class)->prefix('products')->group(function(
     Route::get('/status/{status}','getSolde')->name("product.status");
     Route::get('/category/{category_slug}','getCategory')->name("product.category");
 });
+
+Auth::routes();
+
+// Route::get('/admin', function () {
+//     return redirect('/login');
+// });
+
+Route::resource('admin',ProductAdminController::class)->middleware('auth')->parameters([
+    'admin/products' => 'product',
+]);
+
+Route::get('/home', [HomeController::class, 'index'])->middleware('auth')->name('home');
