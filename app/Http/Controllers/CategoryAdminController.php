@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Product;
 
-class ProductAdminController extends Controller
+class CategoryAdminController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -17,7 +17,7 @@ class ProductAdminController extends Controller
         $data['products'] = Product::paginate(15);
         // dd($products);
 
-        return view('back.products.index', $data);
+        return view('back.categories.index', $data);
     }
 
     /**

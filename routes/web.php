@@ -4,6 +4,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ProductAdminController;
+use App\Http\Controllers\CategoryAdminController;
+use App\Http\Controllers\HomeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -29,12 +31,16 @@ Route::controller(ProductController::class)->prefix('products')->group(function(
 
 Auth::routes();
 
-// Route::get('/admin', function () {
-//     return redirect('/login');
-// });
+Route::get('/admin', function () {
+    return redirect('/admin/products');
+});
 
-Route::resource('admin',ProductAdminController::class)->middleware('auth')->parameters([
+Route::resource('admin/products',ProductAdminController::class)->middleware('auth')->parameters([
     'admin/products' => 'product',
+]);
+
+Route::resource('admin/categories',CategoryAdminController::class)->middleware('auth')->parameters([
+    'admin/categories' => 'category',
 ]);
 
 Route::get('/home', [HomeController::class, 'index'])->middleware('auth')->name('home');
