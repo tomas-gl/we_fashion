@@ -3,7 +3,7 @@
 @section('content')
 <div class="row my-5">
     <div class="col-4 text-center">
-      <img class="shadow rounded" style="max-height:500px" @if(!isset($product->picture)) src="{{ asset('storage/image_default.png') }}" @else src="{{asset('storage/images/'.$product->picture)}}" @endif alt="image_produit">
+      <img class="shadow rounded" style="max-height:500px" @if(!isset($product->picture_name)) src="{{ asset('storage/image_default.png') }}" @else src="{{asset('storage/images/'.$product->picture_name)}}" @endif alt="image_produit">
     </div>
     <div class="col-8 bg-light rounded">
       <p class="fs-5">{{$product->name}}</p>

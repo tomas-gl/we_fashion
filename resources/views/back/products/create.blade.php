@@ -3,7 +3,7 @@
 @section('content')
 <div class="row my-5">
     <div class="col-12 col-md-8 offset-md-2 bg-light p-5 rounded shadow"> 
-        <form action="{{route('products.store')}}" method="post">
+        <form action="{{route('products.store')}}" method="post" enctype="multipart/form-data">
             {{ csrf_field() }}
             <div class="row">
                 <!-- Nom du produit -->
@@ -97,11 +97,11 @@
                 </div>
 
                 <!-- Image -->                    
-                {{-- <div class="mb-3 col-12 col-md-6">
+                <div class="mb-3 col-12 col-md-6">
                     <label class="form-label">Sélectionner une image</label>
                     <input type="file" name="picture"> 
                     @if($errors->has('picture'))<span class="error text-danger">{{$errors->first('picture')}}</span>@endif
-                </div> --}}
+                </div>
             </div>
             <button type="submit" class="btn btn-primary">Submit</button>
         </form>

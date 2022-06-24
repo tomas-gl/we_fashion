@@ -50,12 +50,17 @@ class ProductAdminController extends Controller
             'published' => 'integer',
             'discount' => 'integer',
             'reference' => 'required|string|min:16|max:16',
-            // 'picture' => 'image|max:3000',
+            'picture' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
-        // dd("test");
 
-        // dd($request->all());
-        $product->create($request->all());
+        if(isset($request->picture)){
+            $pictureName = $request->picture->getClientOriginalName();
+            $request->request->add(['picture_name' => $pictureName]);
+
+            $request->file('picture')->storeAs('public/images', $pictureName);
+        }
+        // dd($request->picture, $request->all());
+        $product->create($request->except('picture'));
 
         return redirect()->route('products.index')->with('message', 'success');
     }

@@ -15,7 +15,7 @@ class Product extends Model
 		'description',
 		'price',
 		'size',
-		'picture',
+		'picture_name',
 		'published',
 		'discount',
 		'reference',

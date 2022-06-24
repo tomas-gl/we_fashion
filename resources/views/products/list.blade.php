@@ -7,7 +7,7 @@
         <div class="col-4 my-3">
             <a href="{{route('product', $product->id)}}">
                 <div class="card h-100">
-                    <img class="img-card" @if(!isset($product->picture)) src="{{ asset('storage/image_default.png') }}" @else src="{{asset('storage/images/'.$product->picture)}}" @endif alt="image_produit">
+                    <img class="img-card" @if(!isset($product->picture_name)) src="{{ asset('storage/image_default.png') }}" @else src="{{asset('storage/images/'.$product->picture_name)}}" @endif alt="image_produit">
                     <div class="card-body">
                         <h5 class="card-title">{{$product->name}}</h5>
                         <p class="card-text">{{$product->description}}</p>
