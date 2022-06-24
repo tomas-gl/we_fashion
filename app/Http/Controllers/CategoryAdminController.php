@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Product;
+use App\Models\Category;
 
 class CategoryAdminController extends Controller
 {
@@ -14,7 +14,7 @@ class CategoryAdminController extends Controller
      */
     public function index()
     {
-        $data['products'] = Product::paginate(15);
+        $data['categories'] = Category::paginate(15);
         // dd($products);
 
         return view('back.categories.index', $data);
@@ -27,7 +27,7 @@ class CategoryAdminController extends Controller
      */
     public function create()
     {
-        //
+        return view('back.categories.create');
     }
 
     /**
@@ -36,9 +36,15 @@ class CategoryAdminController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, Category $category)
     {
-        //
+        $this->validate($request, [
+            'name' => 'required|string|min:5|max:100',
+        ]);
+        // dd($request->all());
+        $category->create($request->all());
+
+        return redirect()->route('categories.index')->with('message', 'success');
     }
 
     /**
@@ -60,7 +66,9 @@ class CategoryAdminController extends Controller
      */
     public function edit($id)
     {
-        //
+        $data['category'] = Category::find($id);
+
+        return view('back.categories.edit', $data);
     }
 
     /**
@@ -70,9 +78,15 @@ class CategoryAdminController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Category $category)
     {
-        //
+        $this->validate($request, [
+            'name' => 'required|string|min:5|max:100',
+        ]);
+        // dd($category, $request->all());
+        $category->update($request->all());
+
+        return redirect()->route('categories.index')->with('message', 'Modification réussie !');
     }
 
     /**
@@ -83,6 +97,9 @@ class CategoryAdminController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $category = Category::find($id);
+        $category->delete();
+
+        return redirect()->back()->with('message', 'Catégorie supprimée !');
     }
 }

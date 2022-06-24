@@ -1,5 +1,5 @@
 <!-- Modal -->
-<div class="modal fade" id="confirmModal{{$product->id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" @if(isset($product)) id="confirmModal{{$product->id}}" @else id="confirmModal{{$category->id}}" @endif tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
@@ -11,7 +11,9 @@
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
-          <form action="{{ route('products.destroy', $product->id) }}" method="post">
+          <form 
+            action="@if(isset($product)){{ route('products.destroy', $product->id) }}@else{{ route('categories.destroy', $category->id) }}@endif" 
+            method="post">
                 @csrf
                 @method('DELETE')
             <button type="submit" class="btn btn-primary">Confirmer</button>

@@ -18,6 +18,7 @@ class ProductAdminController extends Controller
     {
         $data['products'] = Product::paginate(15);
         foreach($data['products'] as $key=>$product){
+            if($product->category_id)
             $data['products'][$key]['categorie'] = Category::where("id", $product->category_id)->first()->name; 
         }
             // dd($data['products']);

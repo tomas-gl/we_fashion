@@ -104,7 +104,7 @@
                     @if($errors->has('picture'))<span class="error text-danger">{{$errors->first('picture')}}</span>@endif
                 </div>
             </div>
-            <button type="submit" class="btn btn-primary">Submit</button>
+            <button type="submit" class="btn btn-primary d-block mx-auto mt-3">Modifier</button>
         </form>
     </div>
 </div>
