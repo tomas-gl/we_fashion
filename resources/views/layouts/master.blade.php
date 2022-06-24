@@ -22,5 +22,8 @@
 </div>
 @include('partials.footer')
 <script src="{{asset('js/app.js')}}"></script>
+    <!-- jQuery -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="{{asset('js/price_input.js')}}"></script>
 </body>
 </html>

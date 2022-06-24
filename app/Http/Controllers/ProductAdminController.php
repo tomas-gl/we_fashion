@@ -30,7 +30,8 @@ class ProductAdminController extends Controller
      */
     public function create()
     {
-        //
+        $data['categories'] = Category::get();
+        return view('back.products.create', $data);
     }
 
     /**
@@ -39,9 +40,24 @@ class ProductAdminController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, Product $product)
     {
-        //
+        $this->validate($request, [
+            'category_id' => 'integer',
+            'name' => 'required|string|min:5|max:100',
+            'description' => 'required|string',
+            'price' =>  'required|regex:/^\d+(\.\d{1,2})?$/',
+            'published' => 'integer',
+            'discount' => 'integer',
+            'reference' => 'required|string|min:16|max:16',
+            // 'picture' => 'image|max:3000',
+        ]);
+        // dd("test");
+
+        // dd($request->all());
+        $product->create($request->all());
+
+        return redirect()->route('products.index')->with('message', 'success');
     }
 
     /**

@@ -1,8 +1,11 @@
 @extends('layouts.master')
 
 @section('content')
+@if(session('message'))
+    {{session('message')}}
+@endif
 <div class="my-3">
-    <button type="button" class="btn btn-primary mb-3 float-end">Nouveau</button>
+    <a href="{{route("products.create")}}"><button type="button" class="btn btn-primary mb-3 float-end">Nouveau</button></a>
     <table class="table table-striped">
         <thead>
             <tr>
