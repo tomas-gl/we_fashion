@@ -9,7 +9,13 @@
       <p class="fs-5">{{$product->name}}</p>
       <p>Description du produit : {{$product->description}}</p>
       <p>Prix : {{$product->price}}</p>
-      <p>Taille : {{$product->size}}</p>
+      <p>Taille :
+      <select class="" aria-label="Taille">
+        @foreach($availableSizes as $availableSize)
+          <option>{{$availableSize}}</option>
+        @endforeach
+      </select>
+      </p>
       <p>{{$product->published == 1 ? "Publié" : "Non publié"}}</p>
       @if($product->discount == 1)
         <p>En solde</p>

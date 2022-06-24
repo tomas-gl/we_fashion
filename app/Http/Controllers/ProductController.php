@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Product;
+use App\Models\Size;
+
 
 class ProductController extends Controller
 {
@@ -25,7 +27,13 @@ class ProductController extends Controller
     public function getProduct($id)
     {
         $data['product'] = Product::find($id);
+        $data['sizes'] = Size::get();
         // dd($data['product']);
+
+        $data['availableSizes'] = [];
+        foreach ($data['product']->sizes as $value){
+            $data['availableSizes'][] = $value->name;
+        }
 
         return view('products.show', $data);
     }
