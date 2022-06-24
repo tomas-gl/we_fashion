@@ -22,7 +22,7 @@
                 @forelse($products as $product)
                 <tr>
                     <td>{{$product->name}}</a></td>
-                    <td>{{isset($product->categorie) ? $product->categorie : 'Aucun catégorie'}}</td>
+                    <td>{{isset($product->categorie) ? $product->categorie : 'Aucune catégorie'}}</td>
                     <td>{{$product->price}}</td>
                     <td>{{$product->discount}}</td>
                     <td><a href="{{route('products.edit', $product->id)}}">Modifier</a></td>

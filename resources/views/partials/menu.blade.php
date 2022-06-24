@@ -35,7 +35,7 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
           <li class="nav-item">
-              <a class="nav-link" href="{{route('product.status', $status)}}">SOLDE</a>
+              <a class="nav-link" href="{{route('product.status', $status)}}">SOLDES</a>
             </li>
           <li class="nav-item">
             <a class="nav-link" href="{{route('product.category', $categ_homme)}}">HOMME</a>

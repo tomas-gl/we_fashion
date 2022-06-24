@@ -20,7 +20,6 @@ return new class extends Migration
             $table->string('name', 100)->nullable();
             $table->text('description')->nullable();
             $table->decimal('price', $precision = 8, $scale = 2)->nullable();
-            $table->enum('size', ['XS', 'S', 'M', 'L', 'XL'])->nullable();
             $table->string('picture_name', 255)->nullable();
             $table->boolean('published')->nullable();
             $table->boolean('discount')->nullable();

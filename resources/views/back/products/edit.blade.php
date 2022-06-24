@@ -30,14 +30,12 @@
 
                 <!-- Sélectionner une taille -->
                 <div class="mb-3 col-12 col-md-6">
-                    <label for="size" class="form-label">Sélectionner une taille</label>
-                    <select id="size" name="size" class="form-select">
-                        <option {{$product->size == 'XS' ? 'selected="selected"' : ''}}>XS</option>
-                        <option {{$product->size == 'S' ? 'selected="selected"' : ''}}>S</option>
-                        <option {{$product->size == 'M' ? 'selected="selected"' : ''}}>M</option>
-                        <option {{$product->size == 'L' ? 'selected="selected"' : ''}}>L</option>
-                        <option {{$product->size == 'XL' ? 'selected="selected"' : ''}}>XL</option>
-                    </select>
+                    @foreach($sizes as $size)
+                        <input type="checkbox" class="btn-check" id="size{{$size->id}}" name="sizes[]" value="{{$size->id}}"
+                        {{in_array($size->id, $checkedSizes) ? 'checked' : ''}}
+                        >
+                        <label class="btn btn-outline-primary" for="size{{$size->id}}">{{$size->name}}</label>
+                    @endforeach
                     @if($errors->has('size'))<span class="error text-danger">{{$errors->first('size')}}</span>@endif
                 </div>
 

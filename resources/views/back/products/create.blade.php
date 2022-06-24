@@ -5,6 +5,7 @@
     <div class="col-12 col-md-8 offset-md-2 bg-light p-5 rounded shadow"> 
         <form action="{{ route('products.store') }}" method="post" enctype="multipart/form-data">
             {{ csrf_field() }}
+            {{-- {{dd($sizes)}} --}}
             <div class="row">
                 <!-- Nom du produit -->
                 <div class="mb-3 col-12 col-md-6">
@@ -29,14 +30,10 @@
 
                 <!-- Sélectionner une taille -->
                 <div class="mb-3 col-12 col-md-6">
-                    <label for="size" class="form-label">Sélectionner une taille</label>
-                    <select id="size" name="size" class="form-select">
-                        <option>XS</option>
-                        <option>S</option>
-                        <option>M</option>
-                        <option>L</option>
-                        <option>XL</option>
-                    </select>
+                    @foreach($sizes as $size)
+                        <input type="checkbox" class="btn-check" id="size{{$size->id}}" name="sizes[]" value="{{$size->id}}">
+                        <label class="btn btn-outline-primary" for="size{{$size->id}}">{{$size->name}}</label>
+                    @endforeach
                     @if($errors->has('size'))<span class="error text-danger">{{$errors->first('size')}}</span>@endif
                 </div>
 

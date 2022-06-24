@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Product;
 use App\Models\Category;
+use App\Models\Size;
 use Illuminate\Support\Facades\Storage;
 
 class ProductAdminController extends Controller
@@ -33,6 +34,7 @@ class ProductAdminController extends Controller
     public function create()
     {
         $data['categories'] = Category::get();
+        $data['sizes'] = Size::get();
 
         return view('back.products.create', $data);
     }
@@ -43,7 +45,7 @@ class ProductAdminController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request, Product $product)
+    public function store(Request $request)
     {
         $this->validate($request, [
             'category_id' => 'integer',
@@ -55,6 +57,7 @@ class ProductAdminController extends Controller
             'reference' => 'required|string|min:16|max:16',
             'picture' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
+        // dd($request->all());
 
         if(isset($request->picture)){
             $pictureName = hash('sha256', strval(time())) . $request->picture->getClientOriginalName();
@@ -63,7 +66,10 @@ class ProductAdminController extends Controller
             $request->file('picture')->storeAs('public/images', $pictureName);
         }
 
-        $product->create($request->except('picture'));
+        $product = Product::create($request->except('picture'));
+        // dd($product->sizes());
+        $product->sizes()->attach($request->sizes);
+        // $product->sizes()->attach($request->sizes);
 
         return redirect()->route('products.index')->with('message', 'success');
     }
@@ -89,6 +95,12 @@ class ProductAdminController extends Controller
     {
         $data['product'] = Product::find($id);
         $data['categories'] = Category::get();
+        $data['sizes'] = Size::get();
+
+        $data['checkedSizes'] = [];
+        foreach ($data['product']->sizes as $value){
+            $data['checkedSizes'][] = $value->id;
+        }
 
         return view('back.products.edit', $data);
     }
@@ -125,6 +137,7 @@ class ProductAdminController extends Controller
         }
 
         $product->update($request->except('picture'));
+        $product->sizes()->sync($request->sizes);
 
         return redirect()->route('products.index')->with('message', 'Modification réussie !');
     }
