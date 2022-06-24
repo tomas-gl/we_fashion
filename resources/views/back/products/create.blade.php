@@ -3,7 +3,7 @@
 @section('content')
 <div class="row my-5">
     <div class="col-12 col-md-8 offset-md-2 bg-light p-5 rounded shadow"> 
-        <form action="{{route('products.store')}}" method="post" enctype="multipart/form-data">
+        <form action="{{ route('products.store') }}" method="post" enctype="multipart/form-data">
             {{ csrf_field() }}
             <div class="row">
                 <!-- Nom du produit -->

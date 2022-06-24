@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Product;
 use App\Models\Category;
+use Illuminate\Support\Facades\Storage;
 
 class ProductAdminController extends Controller
 {
@@ -31,6 +32,7 @@ class ProductAdminController extends Controller
     public function create()
     {
         $data['categories'] = Category::get();
+
         return view('back.products.create', $data);
     }
 
@@ -54,12 +56,12 @@ class ProductAdminController extends Controller
         ]);
 
         if(isset($request->picture)){
-            $pictureName = $request->picture->getClientOriginalName();
+            $pictureName = hash('sha256', strval(time())) . $request->picture->getClientOriginalName();
             $request->request->add(['picture_name' => $pictureName]);
 
             $request->file('picture')->storeAs('public/images', $pictureName);
         }
-        // dd($request->picture, $request->all());
+
         $product->create($request->except('picture'));
 
         return redirect()->route('products.index')->with('message', 'success');
@@ -85,6 +87,7 @@ class ProductAdminController extends Controller
     public function edit($id)
     {
         $data['product'] = Product::find($id);
+        $data['categories'] = Category::get();
 
         return view('back.products.edit', $data);
     }
@@ -96,9 +99,34 @@ class ProductAdminController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Product $product)
     {
-        //
+        $this->validate($request, [
+            'category_id' => 'integer',
+            'name' => 'required|string|min:5|max:100',
+            'description' => 'required|string',
+            'price' =>  'required|regex:/^\d+(\.\d{1,2})?$/',
+            'published' => 'integer',
+            'discount' => 'integer',
+            'reference' => 'required|string|min:16|max:16',
+            'picture' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+        ]);
+
+        if(isset($request->picture)){
+            if(isset($product->picture_name))
+            {
+                // dd($product->picture_name);
+                Storage::disk('public')->delete('images/'.$product->picture_name);
+            }
+            $pictureName = hash('sha256', strval(time())) . $request->picture->getClientOriginalName();
+            $request->request->add(['picture_name' => $pictureName]);
+
+            $request->file('picture')->storeAs('public/images', $pictureName);
+        }
+
+        $product->update($request->except('picture'));
+
+        return redirect()->route('products.index')->with('message', 'Modification réussie');
     }
 
     /**
