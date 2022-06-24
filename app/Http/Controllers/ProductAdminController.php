@@ -115,7 +115,6 @@ class ProductAdminController extends Controller
         if(isset($request->picture)){
             if(isset($product->picture_name))
             {
-                // dd($product->picture_name);
                 Storage::disk('public')->delete('images/'.$product->picture_name);
             }
             $pictureName = hash('sha256', strval(time())) . $request->picture->getClientOriginalName();
@@ -126,7 +125,7 @@ class ProductAdminController extends Controller
 
         $product->update($request->except('picture'));
 
-        return redirect()->route('products.index')->with('message', 'Modification réussie');
+        return redirect()->route('products.index')->with('message', 'Modification réussie !');
     }
 
     /**
@@ -137,6 +136,9 @@ class ProductAdminController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $product = Product::find($id);
+        $product->delete();
+
+        return redirect()->back()->with('message', 'Produit supprimé !');
     }
 }

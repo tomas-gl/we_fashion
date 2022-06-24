@@ -25,5 +25,6 @@
     <!-- jQuery -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script src="{{asset('js/price_input.js')}}"></script>
+<script src="{{asset('js/confirm_modal.js')}}"></script>
 </body>
 </html>

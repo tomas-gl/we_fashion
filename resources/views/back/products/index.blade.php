@@ -25,7 +25,12 @@
                 <td>{{$product->price}}</td>
                 <td>{{$product->discount}}</td>
                 <td><a href="{{route('products.edit', $product->id)}}">Modifier</a></td>
-                <td>Supprimer</td>
+                <td><a type="button" class="btn btn-primary delete-btn"
+                     data-bs-toggle="modal" data-bs-target="#confirmModal{{$product->id}}"
+                     data-delete-id="{{$product->id}}">
+                    Launch demo modal
+                </a></td>
+                <td class="px-0"> @include('modals.confirm_modal')</td>
             </tr>
             @empty
             <p>Aucun produit</p>
