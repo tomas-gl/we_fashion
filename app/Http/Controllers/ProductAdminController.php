@@ -11,23 +11,22 @@ use Illuminate\Support\Facades\Storage;
 class ProductAdminController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Display a listing of the products.
      *
      * @return \Illuminate\Http\Response
      */
     public function index()
     {
-        $data['products'] = Product::paginate(15)->onEachSide(0);
+        $data['products'] = Product::orderBy('created_at', 'DESC')->paginate(15)->onEachSide(0);
         foreach($data['products'] as $key=>$product){
             if($product->category_id)
             $data['products'][$key]['categorie'] = Category::where("id", $product->category_id)->first()->name; 
         }
-            // dd($data['products']);
         return view('back.products.index', $data);
     }
 
     /**
-     * Show the form for creating a new resource.
+     * Show the form for creating a new product.
      *
      * @return \Illuminate\Http\Response
      */
@@ -40,7 +39,7 @@ class ProductAdminController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Store a newly created product in storage.
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
@@ -57,8 +56,6 @@ class ProductAdminController extends Controller
             'reference' => 'required|string|min:16|max:16',
             'picture' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
-        // dd($request->all());
-
         if(isset($request->picture)){
             $pictureName = hash('sha256', strval(time())) . $request->picture->getClientOriginalName();
             $request->request->add(['picture_name' => $pictureName]);
@@ -67,26 +64,13 @@ class ProductAdminController extends Controller
         }
 
         $product = Product::create($request->except('picture'));
-        // dd($product->sizes());
         $product->sizes()->attach($request->sizes);
-        // $product->sizes()->attach($request->sizes);
 
         return redirect()->route('products.index')->with('message', 'Produit créé !');
     }
 
     /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
+     * Show the form for editing the specified product.
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
@@ -106,10 +90,10 @@ class ProductAdminController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
+     * Update the specified product in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \Illuminate\Http\Product  $product
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Product $product)

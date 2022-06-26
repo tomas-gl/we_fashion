@@ -10,7 +10,7 @@ use App\Models\Size;
 class ProductController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Display a listing of the products.
      *
      * @return \Illuminate\Http\Response
      */
@@ -20,16 +20,20 @@ class ProductController extends Controller
         $data['products'] = Product::orderBy('created_at', 'DESC')->paginate(6)->onEachSide(0);
         $data['products_count'] = Product::get()->count();
         $data['page_title'] = "Tous les articles";
-        // dd($products);
 
         return view('products.list', $data);
     }
 
+    /**
+     * Display a product.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
     public function getProduct($id)
     {
         $data['product'] = Product::find($id);
         $data['sizes'] = Size::get();
-        // dd($data['product']);
 
         $data['availableSizes'] = [];
         foreach ($data['product']->sizes as $value){
@@ -39,6 +43,12 @@ class ProductController extends Controller
         return view('products.show', $data);
     }
 
+    /**
+     * Display a listing of the products in soldes.
+     *
+     * @param  int  $status
+     * @return \Illuminate\Http\Response
+     */
     public function getSolde($status)
     {      
         // dd("test");
@@ -49,6 +59,12 @@ class ProductController extends Controller
         return view('products.list', $data);
     }
 
+    /**
+     * Display a listing of the products by category.
+     *
+     * @param  int  $category_slug
+     * @return \Illuminate\Http\Response
+     */
     public function getCategory($category_slug)
     {
 
@@ -60,74 +76,7 @@ class ProductController extends Controller
         else{
             $data['page_title'] = "Catégorie femme"; 
         }
-        // dd($products);
 
         return view('products.list', $data);
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Product  $product
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Product $product)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Product  $product
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Product $product)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Product  $product
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Product $product)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Product  $product
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Product $product)
-    {
-        //
     }
 }

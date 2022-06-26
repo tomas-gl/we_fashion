@@ -8,20 +8,19 @@ use App\Models\Category;
 class CategoryAdminController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Display a listing of the categories.
      *
      * @return \Illuminate\Http\Response
      */
     public function index()
     {
-        $data['categories'] = Category::paginate(15)->onEachSide(0);
-        // dd($products);
+        $data['categories'] = Category::orderBy('created_at', 'DESC')->paginate(15)->onEachSide(0);
 
         return view('back.categories.index', $data);
     }
 
     /**
-     * Show the form for creating a new resource.
+     * Show the form for creating a new category.
      *
      * @return \Illuminate\Http\Response
      */
@@ -31,9 +30,10 @@ class CategoryAdminController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Store a newly created category in storage.
      *
      * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\Category  $category
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request, Category $category)
@@ -48,18 +48,7 @@ class CategoryAdminController extends Controller
     }
 
     /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
+     * Show the form for editing the specified category.
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
@@ -72,10 +61,10 @@ class CategoryAdminController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
+     * Update the specified category in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \Illuminate\Http\Category  $category
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Category $category)
@@ -90,7 +79,7 @@ class CategoryAdminController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Remove the specified category from storage.
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
