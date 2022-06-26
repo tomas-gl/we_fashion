@@ -44,7 +44,7 @@ class CategoryAdminController extends Controller
         // dd($request->all());
         $category->create($request->all());
 
-        return redirect()->route('categories.index')->with('message', 'success');
+        return redirect()->route('categories.index')->with('message', 'Catégorie créé !');
     }
 
     /**

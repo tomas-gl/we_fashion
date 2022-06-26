@@ -71,7 +71,7 @@ class ProductAdminController extends Controller
         $product->sizes()->attach($request->sizes);
         // $product->sizes()->attach($request->sizes);
 
-        return redirect()->route('products.index')->with('message', 'success');
+        return redirect()->route('products.index')->with('message', 'Produit créé !');
     }
 
     /**

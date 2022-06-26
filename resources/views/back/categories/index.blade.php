@@ -2,7 +2,7 @@
 
 @section('content')
 @if(session('message'))
-    {{session('message')}}
+    <p class="text-success my-3"><i class="fa fa-check pe-2"></i> {{session('message')}}</p>
 @endif
 <div class="my-3">
     <div class="row">
