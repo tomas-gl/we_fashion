@@ -17,7 +17,7 @@ class ProductController extends Controller
     public function index()
     {
         
-        $data['products'] = Product::orderBy('created_at', 'DESC')->paginate(6);
+        $data['products'] = Product::orderBy('created_at', 'DESC')->paginate(6)->onEachSide(0);
         $data['products_count'] = Product::get()->count();
         $data['page_title'] = "Tous les articles";
         // dd($products);
@@ -42,7 +42,7 @@ class ProductController extends Controller
     public function getSolde($status)
     {      
         // dd("test");
-        $data['products'] = Product::where('discount', $status)->orderBy('created_at', 'DESC')->paginate(6);
+        $data['products'] = Product::where('discount', $status)->orderBy('created_at', 'DESC')->paginate(6)->onEachSide(0);
         $data['products_count'] = Product::where('discount', $status)->get()->count();
         $data['page_title'] = "Articles en soldes";
 
@@ -52,7 +52,7 @@ class ProductController extends Controller
     public function getCategory($category_slug)
     {
 
-        $data['products'] = Product::where('category_id', $category_slug)->orderBy('created_at', 'DESC')->paginate(6);
+        $data['products'] = Product::where('category_id', $category_slug)->orderBy('created_at', 'DESC')->paginate(6)->onEachSide(0);
         $data['products_count'] = Product::where('category_id', $category_slug)->get()->count();
         if($category_slug == 1){
             $data['page_title'] = "Catégorie homme";
