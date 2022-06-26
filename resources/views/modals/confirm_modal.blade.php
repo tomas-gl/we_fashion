@@ -3,7 +3,7 @@
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Supprimer un article</h5>
+          <h5 class="modal-title" id="exampleModalLabel">Suppression @if(isset($product)) d'un produit @else d'un article @endif</h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
