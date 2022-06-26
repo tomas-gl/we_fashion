@@ -18,7 +18,7 @@
         </select>
         </p>
         <p>{{$product->published == 1 ? 'Publié' : 'Non publié'}}</p>
-        <p>{{$product->published == 1 ? 'En solde' : ''}}</p>
+        <p>{{$product->discount == 1 ? 'En solde' : ''}}</p>
         <p>Référence produit : {{$product->reference}}</p>
         <button type="button" class="btn btn-primary">Acheter</button>
       </div>

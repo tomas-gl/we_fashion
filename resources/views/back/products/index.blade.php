@@ -23,8 +23,8 @@
                 <tr>
                     <td>{{$product->name}}</a></td>
                     <td>{{isset($product->categorie) ? $product->categorie : 'Aucune catégorie'}}</td>
-                    <td>{{$product->price}}</td>
-                    <td>{{$product->discount}}</td>
+                    <td>{{str_replace('.', ',', $product->price)}} €</td>
+                    <td>{{$product->discount == 1 ? 'En solde' : 'Standard'}}</td>
                     <td><a href="{{route('products.edit', $product->id)}}" type="button" class="btn btn-secondary delete-btn"><i class="fa fa-pen pe-2"></i>Modifier</a></td>
                     <td><a type="button" class="btn btn-danger delete-btn"
                         data-bs-toggle="modal" data-bs-target="#confirmModal{{$product->id}}">
