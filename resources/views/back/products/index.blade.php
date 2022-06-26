@@ -5,9 +5,9 @@
     {{session('message')}}
 @endif
 <div class="my-3">
+    <a href="{{route("products.create")}}" class="d-block text-end"><button type="button" class="btn btn-primary mb-3"><i class="fa fa-plus pe-2"></i>Nouveau produit</button></a>
     <div class="table-responsive">
-    <a href="{{route("products.create")}}"><button type="button" class="btn btn-primary mb-3 float-end">Nouveau</button></a>
-        <table class="table table-striped text-center border shadow">
+        <table class="table table-striped text-center border border-3 shadow">
             <thead>
                 <tr>
                 <th scope="col">Nom</th>
@@ -25,10 +25,10 @@
                     <td>{{isset($product->categorie) ? $product->categorie : 'Aucune catégorie'}}</td>
                     <td>{{$product->price}}</td>
                     <td>{{$product->discount}}</td>
-                    <td><a href="{{route('products.edit', $product->id)}}">Modifier</a></td>
+                    <td><a href="{{route('products.edit', $product->id)}}" type="button" class="btn btn-secondary delete-btn"><i class="fa fa-pen pe-2"></i>Modifier</a></td>
                     <td><a type="button" class="btn btn-danger delete-btn"
                         data-bs-toggle="modal" data-bs-target="#confirmModal{{$product->id}}">
-                        Supprimer
+                        <i class="fa fa-trash pe-2"></i>Supprimer
                     </a></td>
                     <td class="px-0"> @include('modals.confirm_modal')</td>
                 </tr>

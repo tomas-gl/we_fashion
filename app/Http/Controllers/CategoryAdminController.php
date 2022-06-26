@@ -14,7 +14,7 @@ class CategoryAdminController extends Controller
      */
     public function index()
     {
-        $data['categories'] = Category::paginate(15);
+        $data['categories'] = Category::paginate(15)->onEachSide(0);
         // dd($products);
 
         return view('back.categories.index', $data);

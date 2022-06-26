@@ -7,7 +7,7 @@
         @forelse ($products as $product)
         <div class="col-12 col-md-6 col-xl-4 my-3">
             <a href="{{route('product', $product->id)}}" class="text-decoration-none text-dark">
-                <div class="card h-100 shadow">
+                <div class="card card-product h-100 shadow">
                     <img class="img-card" @if(!isset($product->picture_name)) src="{{ asset('storage/image_default.png') }}" @else src="{{asset('storage/images/'.$product->picture_name)}}" @endif alt="image_produit">
                     <div class="card-body">
                         <h5 class="card-title">{{$product->name}}</h5>

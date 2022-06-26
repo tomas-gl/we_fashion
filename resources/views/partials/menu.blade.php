@@ -14,7 +14,7 @@
 
 <nav class="navbar navbar-expand-sm navbar-light">
   <div class="container-fluid">
-    <a class="navbar-brand" href="{{route('index')}}" style="color:#66EB9A;">WE FASHION</a>
+    <a class="navbar-brand" @if($admin) @else href="{{route('index')}}" @endif style="color:#66EB9A;">WE FASHION</a>
     <button class="navbar-toggler toggler-example" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent1"
     aria-controls="navbarSupportedContent1" aria-expanded="false" aria-label="Toggle navigation"><span class="dark-blue-text"><i
         class="fas fa-bars fa-1x"></i></span></button>
@@ -39,6 +39,9 @@
           </li>
         @endif
         </ul>
+        @if($admin)
+          <a class="navbar-brand" href="{{route('index')}}"><i class="fa fa-store pe-2"></i>Site client</a>
+        @endif
     </div>
   </div>
 </nav>

@@ -17,7 +17,7 @@ class ProductAdminController extends Controller
      */
     public function index()
     {
-        $data['products'] = Product::paginate(15);
+        $data['products'] = Product::paginate(15)->onEachSide(0);
         foreach($data['products'] as $key=>$product){
             if($product->category_id)
             $data['products'][$key]['categorie'] = Category::where("id", $product->category_id)->first()->name; 
